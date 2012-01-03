@@ -1,0 +1,64 @@
+<html lang="en" class="no-js">
+<head_merge>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<lift:html5></lift:html5>
+	<title>Fear of Software</title>
+	<meta name="description" content="" />
+	<meta name="author" content="Fear of Software" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<link rel="shortcut icon" href="/static/images/logo64.png" />
+	<link rel="apple-touch-icon" href="/static/logo.png" />
+	<link rel="stylesheet" href="/static/css/style.css?v=2" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+	<lift:utilities.ieconditionalcomment version="lt IE 9">
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	</lift:utilities.ieconditionalcomment>
+</head_merge>
+<body>
+
+	<lift:utilities.ieDump></lift:utilities.ieDump>
+	<div id="fullhead-container">
+		<div id="header-container">
+			<header class="wrapper">
+				<img class="logo" src="/static/images/logo64.png" />
+				<h1 id="title"><a href="http://fearofsoftware.com/">Fear of Software</a></h1>
+				<nav id="menu">
+					<lift:embed what="nav"></lift:embed>
+				</nav>
+			</header>
+		</div>
+		<div id="subhead-container">
+			<header class="wrapper">
+				<h3 id="subtitle"><lift:bind name="title"></lift:bind></h3>
+			</header>
+		</div>
+	</div>
+	<div class="wrapper">
+		<div id="main">
+			<lift:bind name="content"></lift:bind>
+		</div>
+	</div>
+	<div id="footer-container">
+		<footer class="wrapper">
+			<h4><lift:embed what="footer"></lift:embed></h4>
+		</footer>
+	</div>
+
+	<script src="/static/js/script.js"></script>
+	
+	<lift:utilities.ieconditionalcomment version="lt IE 7">
+        <script src="/static/js/libs/dd_belatedpng.js"></script>
+        <script>
+        	DD_belatedPNG.fix('img, .png_bg');
+       	</script>
+    </lift:utilities.ieconditionalcomment>
+		
+	
+	<lift:utilities.ieDivClose></lift:utilities.ieDivClose>
+	
+	<lift:utilities.analyticsScript></lift:utilities.analyticsScript>
+</body>
+</html>

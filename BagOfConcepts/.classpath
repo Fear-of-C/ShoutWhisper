@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="libraries/extjwnl-1.5.3.jar"/>
+	<classpathentry kind="lib" path="libraries/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="testlibs/scalatest-1.5.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/lucene-core-3.1.0.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-community-1.4.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-cypher-1.4.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-graph-algo-1.4.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="libraries/mysql-connector-java-5.1.17-bin.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/arq-2.8.7.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/icu4j-3.4.4.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/iri-0.8.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/jena-2.6.4-tests.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/jena-2.6.4.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/slf4j-log4j12-1.5.8.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/wstx-asl-3.2.9.jar"/>
+	<classpathentry kind="lib" path="libraries/jena/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-graph-matching-1.4.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-jmx-1.4.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-kernel-1.4.1-tests.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-kernel-1.4.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-lucene-index-1.4.1.jar" sourcepath="/home/nick/.m2/repository/org/neo4j/neo4j-lucene-index/1.4.1/neo4j-lucene-index-1.4.1-sources.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-shell-1.4.1.jar"/>
+	<classpathentry kind="lib" path="libraries/neo4j/lib/neo4j-udc-1.4.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

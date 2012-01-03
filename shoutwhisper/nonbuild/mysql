@@ -1,0 +1,16 @@
+DROP DATABASE fearsoftware_s2;
+CREATE DATABASE fearsoftware_s2;
+USE fearsoftware_s2;
+
+GRANT ALL ON fearsoftware_s2.* TO 'fearsoftware_s2'@'localhost' IDENTIFIED BY '((em2))';
+
+CREATE TABLE addresses (
+	id INT	NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	email VARCHAR(250)      NOT NULL
+);
+
+CREATE TABLE confirm (
+	id INT	NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	emailText VARCHAR(250)      NOT NULL ,
+	digest CHAR(64)	NOT NULL
+);

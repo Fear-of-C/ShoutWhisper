@@ -1,0 +1,4 @@
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://localhost/fearsoftware_s1
+db.user=fearsoftware_s1
+db.password=((em))

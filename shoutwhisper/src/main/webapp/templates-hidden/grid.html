@@ -1,0 +1,86 @@
+<html lang="en" class="no-js">
+<head_merge>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+	<meta charset="utf-8">
+	<meta name="description" content="" />
+	<meta name="author" content="Fear of Software" />
+	
+	<title>ShoutWhisper</title>
+	
+	<link rel="stylesheet" href="/static/css/columnal.css" type="text/css" media="screen" />
+	
+	<!-- Fixes for IE -->
+	 <lift:utilities.ieconditionalcomment version="lt IE 9">
+    	<link rel="stylesheet" href="/static/css/ie.css" type="text/css" media="screen" />
+	</lift:utilities.ieconditionalcomment>
+
+	<!-- use "fixed-984px-ie.css" or "fixed-960px-ie.css for a 984px or 960px fixed width for IE6 and 7 -->
+		 <lift:utilities.ieconditionalcomment version="lt IE 7">
+			<link rel="stylesheet" href="/static/css/fixed-984px-ie.css" type="text/css" media="screen" />
+		</lift:utilities.ieconditionalcomment>
+
+	<!-- Fixes for IE6, only needed if IE 6 will be supported - width must match 984px or 960px of css file used above -->
+	<!-- Use .imagescale to fix IE6 issues with full-column width images (class must be added to any image wider than the column it is placed into) -->
+		 <lift:utilities.ieconditionalcomment version="lt IE 6">
+			<link rel="stylesheet" href="/static/css/ie6-984px.css" type="text/css" media="screen" />
+		</lift:utilities.ieconditionalcomment>
+	<!-- End fixes for IE -->
+
+	<!-- Customizations here --> 
+	    <link rel="stylesheet" href="/static/css/custom.css" type="text/css" media="screen" />
+
+	<!-- Page build tools - only needed while creating a site, remove when launching - Gray box colors and page debugging tools -->
+	<!--  <link rel="stylesheet" href="/static/css/build.css" type="text/css" media="screen" /> -->
+	    
+	    <lift:utilities.ieconditionalcomment version="lt IE 9">
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		</lift:utilities.ieconditionalcomment>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		
+		<link rel="shortcut icon" href="/static/images/logo64.png" />
+		<link rel="apple-touch-icon" href="/static/logo.png" />
+</head_merge>
+<body>
+<lift:utilities.ieDump></lift:utilities.ieDump>
+<div class=".container">
+	<header class="row" id="head">
+		<h1 id="title" class="col_3"> ShoutWhisper</h1>
+		
+		<nav class="col_9 omega" id="menu">
+			<ul class="nav">
+				<li><a href="/">FoS</a></li>
+				<div id="past">
+					<li><a href="/schemetouch/">Scm Tch</a></li>
+					<li><a href="/bart/">Bart</a></li>
+				</div>
+				<div id="blogs">
+					<li><a href="/blog/">Our Blog</a></li>
+					<li><a href="http://alexboland.blogspot.com/">Alex</a></li>
+					<li><a href="http://fearofc.com/">Nick</a></li>
+					<li><a href="/codeblog/">Code</a></li>
+				</div>
+				<li><a href="/about/">About</a></li>
+			</ul>
+		</nav>
+	</header>
+	<lift:bind name="content"></lift:bind>
+	<footer>
+		<div class="row">
+			<div class="col_12 omega">
+				Fear of Software.
+			</div>
+		</div>
+	</footer>
+</div>
+<lift:utilities.ieDivClose></lift:utilities.ieDivClose>
+<lift:utilities.analyticsScript></lift:utilities.analyticsScript>
+</body>
+</html>
+
+
+
+
+
+
+

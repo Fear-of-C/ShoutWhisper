@@ -1,0 +1,22 @@
+<div class="lift:surround?with=grid;at=content">
+	<div class="row" id="panel">
+		<div class="col_6" id="controls">
+			<div class="lift:embed?what=sourcemanagementform"></div>
+		</div>
+		<div class="col_1"></div>
+		<div class="col_5 omega" id="agents">
+			<div class="lift:embed?what=agentmanagementform"></div>
+		</div>
+	</div>
+	
+	<div id="updates" class="feed lift:comet?type=CometClient;name=Client">
+		<div id="client">
+			Currently loading dynamic updates.
+		</div>
+	</div>
+	
+	<div class="row" id="postconditions">
+		<div class="col_6"><div class="lift:client.logout"></div></div>
+		<div class="col_6 omega"><a href="privacy.html">Privacy Policy</a></div>
+	</div>
+</div>

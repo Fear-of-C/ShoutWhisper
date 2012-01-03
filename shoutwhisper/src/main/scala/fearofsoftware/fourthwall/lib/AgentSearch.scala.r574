@@ -1,0 +1,144 @@
+package fearofsoftware.fourthwall.lib
+
+import fearofsoftware.fourthwall.model._
+import fearofsoftware.fourthwall.comet.CometClient
+import fearofsoftware.fourthwall.comet.FoSMessageFound
+import fearofsoftware.fourthwall.lib.input.Private
+import java.util.Date
+import scala.collection.JavaConversions.JConcurrentMapWrapper
+import java.util.concurrent.ConcurrentHashMap
+import net.liftweb.actor.LiftActor
+import fearofsoftware.fourthwall.comet.FosReceivedReset
+import net.liftweb.mapper.By
+
+/**
+ * 
+ */
+object AgentSearch {
+	
+	val defaultAgents = Set[Agent](
+			
+	)
+	
+	/**
+	 * We could still use user actors if we had to, but maybe we don't.
+	 */
+	private val userClients = new JConcurrentMapWrapper(new ConcurrentHashMap[User, Set[CometClient]])
+	private val userActors = new JConcurrentMapWrapper(new ConcurrentHashMap[User, UserActor])
+	
+	/**
+	 * We can still use actors for logged-in users.  These will run the algorithms that do re-orderings.
+	 * 
+	 * So if the actor isn't online, then we just keep a log of what should have been delivered.
+	 * 
+	 * When this comes into being, it should attempt to restore itself from history.  This means that
+	 * we must take care about what algorithm is being used to sort things.
+	 * 
+	 */
+	private class UserActor(user : User) extends LiftActor{
+		
+		private val clients = scala.collection.mutable.Set[CometClient]()
+		private var entries : List[Article] = Nil
+		
+		override def messageHandler: PartialFunction[Any,Unit] = {
+			case x : (Article, Set[Agent]) => {
+				if(entries == Nil){
+					//assume it's uninitialized
+					entries = user.getHistory.toList
+				}
+				//we do something to entries and then save
+				//come to think of it, let's not bother to save yet.
+				//we'll just have a history that reflects exactly what came in
+				entries = x._1 :: entries
+				entries = if(entries.size > DiscourseObject.maxHistory) entries.take(entries.size - 1) else entries
+				clients.foreach(_ ! FoSMessageFound(x._1, 0, entries.size - 1))
+			}
+			case x : AddClient => {
+				clients += x.client
+				x.client ! FosReceivedReset(entries)
+			}
+			case x : RemoveClient => {
+				clients -= x.client
+			}
+		}
+	}
+	private case class AddClient(client : CometClient)
+	private case class RemoveClient(client : CometClient)
+	
+	/**
+	 * Gets an article created by a watcher.  Sends it to the appropriate places,
+	 * which are the agent histories and the registered clients.
+	 * 
+	 * If the article has private agents, it should only match to the per-user versions of
+	 * those agents.  So it should be safe to match across all owners of agents that the
+	 * agents contain as owners.
+	 */
+	def forward(article : Article) = {
+		val userAgentArticle = scala.collection.mutable.Map[User, Set[Agent]]()
+		object userAgentArticleActor extends LiftActor{
+			override def messageHandler: PartialFunction[Any,Unit] = {
+				case x : (User, Agent) => {
+					if(userAgentArticle.contains(x._1)){
+						userAgentArticle.put(x._1, userAgentArticle(x._1) + x._2)
+					}else{
+						userAgentArticle.put(x._1, Set[Agent](x._2))
+					}
+				}
+				case Dispatch => {
+					userAgentArticle.foreach{
+						case (user, agents) =>{
+							user.appendHistory(article, agents)
+							userActors(user) ! (article, agents)
+						}
+					}
+				}
+			}
+		}
+		case object Dispatch
+		article.findMatching.foreach(agent => {
+			agent.appendHistory(article)
+			//now we can get to forwarding to the clients
+			//build a map from user to article by agent
+			agent.self.owners.map(user => {
+				userAgentArticleActor ! (user, agent)
+			})
+		})
+		userAgentArticleActor ! Dispatch
+	}
+	
+	/**
+	 * Returns an actor which the client can use to ask for history.  If a user actor
+	 * is already set up, then it may dispatch messages while the map is being modified,
+	 * missing the new client.  However, those messages will appear in the history.  It
+	 * might also proceed to send spurious messages, which is also bad.  Ideally, it
+	 * becomes aware of the client only when the client has requested history.
+	 * We remove the user actor from our table when its clients drop to 0, even if
+	 * it still has some messages to dispatch - that means that new messages will
+	 * get picked up be the next user object.
+	 */
+	def registerClient(client : CometClient) : LiftActor= {
+		val user = User.find(By(User.id, client.owner)).openTheBox
+		synchronized{
+			if(!userClients.contains(user)){
+				userClients.put(user, Set[CometClient](client))
+				userActors.put(user, new UserActor(user))
+			}else{
+				userClients.put(user, userClients(user) + client)
+			}
+			userActors(user).asInstanceOf[LiftActor]
+		}
+	}
+	
+	def deregisterClient(client : CometClient) = {
+		val user = User.find(By(User.id, client.owner)).openTheBox
+		synchronized{
+			val clients = userClients(user) - client
+			if(clients.isEmpty){
+				userClients.remove(user)
+				userActors.remove(user)
+			}else{
+				userClients.put(user, clients)
+			}
+		}
+	}
+}

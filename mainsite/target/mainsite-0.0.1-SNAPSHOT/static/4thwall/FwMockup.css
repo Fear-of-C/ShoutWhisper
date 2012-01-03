@@ -1,0 +1,10 @@
+.style_contentPanel{background:#C8C8C8;}
+.style_actionPanel{background:#C0C0C0;}
+.style_sectionDock{background:#82CAFF;}
+.style_dockButton{background:#6698FF;}
+.style_mainPanel{background:#E8E8E8;}
+.sendButton{display:block;font-size:16pt;}
+.gwt-DialogBox{width:400px;}
+.dialogVPanel{margin:5px;}
+.serverResponseLabelError{color:red;}
+#closeButton{margin:15px 6px 6px;}

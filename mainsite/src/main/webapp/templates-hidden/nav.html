@@ -1,0 +1,29 @@
+<lift:children>
+<head_merge>
+
+	<link rel="stylesheet" href="/static/css/dropdown.css" />
+	
+	<lift:utilities.ieconditionalcomment version="lt IE 7">
+		<script src="/static/js/jquery.dropdown.js"></script>
+	</lift:utilities.ieconditionalcomment>
+</head_merge>
+<ul class="dropdown dropdown-horizontal">
+	<li><a href="/">FoS</a></li>
+	<li class="dir">
+		Past
+		<ul>
+			<li><a href="/schemetouch/">Scm Tch</a></li>
+			<li><a href="/bart/">Bart</a></li>
+		</ul>
+	</li>
+	<li class="dir">
+		Blogs
+		<ul>
+			<li><a href="/blog/">Us</a></li>
+			<li><a href="http://alexboland.blogspot.com/">Alex</a></li>
+			<li><a href="http://fearofc.com/">Nick</a></li>
+		</ul>
+	</li>
+	<li><a href="/about/">About</a></li>
+</ul>
+</lift:children>

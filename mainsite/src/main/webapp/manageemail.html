@@ -1,0 +1,23 @@
+<lift:surround with="boilerplate">
+
+	<lift:bind-at name="title">
+		Email Confirmation
+	</lift:bind-at>
+	<lift:bind-at name="content">
+		
+		<article>
+			<header>
+				<h3>Mailing List</h3>
+			</header>
+			
+			<p>
+				<lift:emailmanagement.confirm>
+					<message:text />
+				</lift:emailmanagement.confirm>
+				<lift:emailmanagement.unsubscribe>
+					<message:text />
+				</lift:emailmanagement.unsubscribe>
+			</p>
+		</article>
+	</lift:bind-at>
+</lift:surround>

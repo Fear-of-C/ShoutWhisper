@@ -1,0 +1,87 @@
+package fearofsoftware.fourthwall.model
+
+import net.liftweb.mapper._
+import java.util.Date
+import net.liftweb.common.Box
+
+/**
+ * Represents an article in the system.  Anything that has text can be an article.
+ */
+trait Article extends Discourse{
+
+	def articleTraits = Array("text")
+	override def self = this.asInstanceOf[DiscourseObject]
+	
+	def isArticle = {
+		articleTraits.forall(self.has(_))
+	}
+	
+	/**
+	 * Searches things in the database by a bag-of-traits
+	 * and/or bag-of-words.  Can call words traits for matching purposes.
+	 * 
+	 * We might actually match by all traits.  So for each trait, we search the 
+	 * trait tables and match when names line up.  If we have word list, in our
+	 * traits, then we can search by list.
+	 * 
+	 * When must we absolutely batch things into queries rather than computing
+	 * intermediate results?  Could we allow some minor inconsistency in a search
+	 * result in order to break them up?
+	 * 
+	 * So we could gather all of the words we want and then foreach the query.
+	 * Unclear if this is actually more efficient than using 1 big query.
+	 * It might work better, as we wouldn't have to double-reference 1 table.
+	 * We can do this with the named join syntax.  Much better.
+	 * 
+	 * We want to find 2 traits of the same name that are equal between the tables.
+	 * We also want to find 2 word uses of the same word (for bag of words).
+	 * 
+	 * TODO: Make sure that names of tables/columns are correct
+	 */
+	def findMatching : Set[Agent] = {
+		def articleTraits = "SET ArticleTraits = SELECT Trait.* FROM " +
+				"DiscourseObject JOIN Trait " +
+				"ON DiscourseObject.id = Trait.discourse " + 
+				"JOIN TraitName ON TraitName.id = Trait.Name " +
+				"WHERE DiscourseObject.Type = Article;"
+		def agentWords = "SET AgentTraits = SELECT Trait.* FROM " + 
+				"DiscourseObject JOIN Trait " +
+				"ON DiscourseObject.id = Trait.discourse " +
+				"JOIN TraitName ON TraitName.id = Trait.Name " +
+				"WHERE TraitName.string = 'HasWord'"
+		
+		
+		def matchSql = "SELECT DiscourseRight.* FROM ArticleTraits JOIN AgentTraits " +
+			"ON ArticleTraits.Value = AgentTraits.Value " +
+			"JOIN DiscourseObject DiscourseLeft ON DiscourseLeft.id = ArticleTraits.Discourse " +
+			"JOIN DiscourseObject DiscourseRight ON DiscourseRight.id = AgentTraits.Discourse " +
+			"WHERE DiscourseLeft.id = ?"
+		
+		val result : List[Agent] = 
+		  DiscourseObject.findAll(BySql(articleTraits + agentWords + matchSql, DiscourseObject.valid, this.getId))
+		
+		result.toSet[Agent]
+		
+	}
+	
+	def findUniversal : Set[Agent] = {
+		val universalSql = "SELECT DiscourseObject.* FROM DiscourseObject "+
+				"JOIN UniversalAgents ON UniversalAgents.agentId = DiscourseObject.id"
+		DiscourseObject.findAll(BySql(universalSql, DiscourseObject.valid)).toSet
+	}
+	
+	def findRelevant : Set[Agent] = {findMatching ++ findUniversal}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+

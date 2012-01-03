@@ -1,0 +1,57 @@
+<lift:surround with="boilerplate">
+
+	<lift:bind-at name="title">SchemeTouch</lift:bind-at>
+	<lift:bind-at name="content">
+	
+		<head_merge>
+		<lift:utilities.contenthost>
+    	<script videosource:src="/video.js" type="text/javascript" charset="utf-8"></script>
+    	<link rel="stylesheet" videocss:href="/video-js.css" type="text/css" media="screen" title="Video JS" charset="utf-8" />
+		</lift:utilities.contenthost>
+		<script type="text/javascript" charset="utf-8">
+		    // Add VideoJS to all video tags on the page when the DOM is ready
+		    VideoJS.setupAllWhenReady();
+		  </script>
+	  </head_merge>
+	
+		<aside>
+			<h3>Motivations</h3>
+			<ol>
+				<li>A touchscreen does not discriminate on method of input as strongly as a mouse/keyboard does.
+				</li>
+				<li>The interface adapts.  We like this. 
+				</li>
+				<li>When the syntax is simple, the computer knows best.  We hope this will be very useful to beginners, and to those who are extremely tired or drunk.
+				</li>
+			</ol>
+			
+		</aside>
+		<article>
+			<header>
+				<h3>Touchscreen Hacking (Demo Video)</h3>
+				<p>Try the <lift:utilities.contenthost><a videocss:href="/schemetouch/SchemeTouch.html" target="_blank">live demo</a></lift:utilities.contenthost> and/or watch the video below (we recommend the video, as the demo is still pretty buggy).</p>
+			</header>
+			<lift:utilities.videotag name="machinationdemovideo" width="640" height="480"></lift:utilities.videotag>
+			<p>
+			<em>Video is from an HTC HD2 hacked to run Android.  The choppiness is due to limitations on taking screen captures of Android.</em>
+			</p>
+			<hr />
+			<p>
+			While text editing is the time-tested default way to write computer programs, very rarely does a computer run code as it is.  Whether compiled or interpreted, code goes through all sorts of intermediate stages between how it appears to a human programmer and how the computer actually uses it.
+			</p>
+			<p>
+			We decided one day to ask why.
+			</p>
+			<p>
+			We had a lot of thinking and planning to do.  We didn't want yet another drag-and-drop editor - that's overdone, and more importantly, slow.  Furthermore, we weren't about to spend years developing a new programming language - whatever we built had to be compatible with existing code.
+			</p>
+			<p>
+			What we came up with was something of an inversion of the 1st intermediate stage code usually goes through - parsing.  Instead of turning text into a more abstract representation, we decided that the computer, being all-knowing in such things, should suggest the next course of action from what it knows is available.  We save the user from ever making syntax errors, and furthermore relieve the burden of typing on a touchscreen.
+			</p>
+			<lift:embed what="email" />
+			<p>
+			Scheme Touch is not our primary project at the moment.  If you care to see it finished, please contact us at the address below.
+			</p>
+		</article>
+	</lift:bind-at>
+</lift:surround>

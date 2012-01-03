@@ -1,0 +1,96 @@
+/*
+_______________________________
+Desktop version layout - place your custom code here */
+
+body {
+	background-color: #F5EED7;
+}
+
+#head {
+	background-color: #176573;
+	color: white;
+	border-bottom: 10px solid black;
+}
+
+#updates {
+	margin-top: 20px;
+}
+
+#updates article{
+	background-color: #8E9E63;
+	margin-bottom: 20px;
+}
+
+#controls {
+	background-color: #E6DBB0;
+	padding: 5px;
+}
+
+#controls .row {
+	border-bottom: 3px solid #C4BCA0;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+
+#agents{
+	background-color: #E6DBB0;
+	/*position: absolute;*/
+	/*height: 100%;*/
+	/*right: 0%;*/
+	padding: 5px;
+}
+
+#panel {
+	background-color: #E6DBB0;
+	position: relative;
+}
+
+
+.agent {
+	border-bottom: 1px solid black;
+}
+
+footer .row {
+	background-color: #C4BCA0;
+	border-top: 1px solid black;
+}
+
+nav{
+	top: 60px;
+}
+
+nav ul, nav ul li, nav ul div li, nav ul div{
+	display: inline;
+}
+
+nav ul li a, nav ul li a:hover, nav ul li a:visited, nav ul div li a, nav ul div li a:hover, nav ul div li a:visited{
+	color:white;
+}
+
+/*
+_______________________________
+Mobile version - preset code from cssgrid.net */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	.examplecontainer {}
+
+	body {}
+	
+}
+
+
+/*
+_______________________________
+Provide higher res assets for iPhone 4 - preset code from cssgrid.net */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+	/* An example of how to override an image with one twice the size for iPhone 4. Specify the original pixel size with background-size.
+	.download {
+	background: url(../img/downarrow@2x.png) no-repeat;
+	background-size: 27px 28px;
+	}
+	*/
+
+}
